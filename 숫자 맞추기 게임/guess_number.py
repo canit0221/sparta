@@ -13,7 +13,7 @@ while True:
 
       # 입력이 숫자인지 확인(유효성검사)
       if player_number.isdigit():
-          player_number = int(player_input)
+          if 1 <= player_number <= 10: 
 
           # 입력한 숫자가 큰지 작은지 힌트를 얻습니다.
           if player_number > computer_number:
@@ -42,4 +42,3 @@ while True:
   elif play_again.lower() == 'n': # n을 입력하면 게임 종료
     print('게임을 종료합니다. 즐거우셨나요? 또 만나요!')
     break
-#피드백 환영합니다.

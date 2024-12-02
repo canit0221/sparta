@@ -9,10 +9,10 @@ while True:
   #플레이어가 정답을 입력할때까지 반복
   while True:
       # 플레이어가 숫자를 입력
-      player_input = input("예상 숫자: ")
+      player_number = input("예상 숫자: ")
 
       # 입력이 숫자인지 확인(유효성검사)
-      if player_input.isdigit():
+      if player_number.isdigit():
           player_number = int(player_input)
 
           # 입력한 숫자가 큰지 작은지 힌트를 얻습니다.

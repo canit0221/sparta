@@ -10,16 +10,16 @@ class Person:  # Person 클래스 생성
                     self.age = age # 나이 저장
                     break # 반복문 종료
                 else: # 나이가 0보다 작으면
-                    print("유효하지 않은 나이입니다.") # 안내
+                    print("유효하지 않은 나이입니다.") # 안내문
             except ValueError: # 숫자 외 입력 예외 처리
-                print("숫자만 입력해주세요.") # 
+                print("숫자만 입력해주세요.") # 안내문
         
         while True:  # 성별 유효성 검사 반복문 시작
             gender = input("성별: ").lower()  # 성별 입력 후 소문자 변환
             if gender in ['male', 'female']:  # male 또는 female 입력 검사
-                self.gender = gender  # 영문 성별의 한글 변환
+                self.gender = gender  # 성별 저장
                 break  # 반복문 종료
-            print("잘못된 성별을 입력하셨습니다. 'male' 또는 'female'을 입력하세요.")  # 잘못된 입력 메시지 출력
+            print("잘못된 성별을 입력하셨습니다. 'male' 또는 'female'을 입력하세요.")  # 안내문
 
     def display(self):  # 정보 출력 함수
         print(f"이름: {self.name}, 성별: {self.gender}\n나이: {self.age}")  # 저장된 정보 출력

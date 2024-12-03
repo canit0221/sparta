@@ -32,6 +32,7 @@ class Person:  # Person 클래스 생성
         else:  # 성인 여부 확인
             print(f"안녕하세요, {self.name}님!")  # 성인 인사말 출력
 
+
 p1 = Person()  # Person 클래스 객체 생성
 p1.display()  # 객체 정보 출력
 p1.greet()  # 인사말 출력

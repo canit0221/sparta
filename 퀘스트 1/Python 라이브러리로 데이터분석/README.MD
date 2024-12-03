@@ -171,3 +171,32 @@
     강남구	449	21	13	3850	4284	77.728285	85.714286	76.923077	42.857143	86.484594	66.519670
     강동구	156	6	4	2366	2712	78.846154	100.000000	75.000000	33.347422	82.890855	60.469108
     ```
+
+<aside>
+🔥
+
+### 3. Python 라이브러리로 데이터 분석하기 (선택)
+
+### 추가 도전 과제
+
+1. Python 라이브러리 함수를 사용하여 인구 데이터(pop_kor.csv) 파일을 불러오고, DataFrame을 출력해주세요.
+    - Quiz에서 수행한 DataFrame의 구별 index를 기준으로 merge를 할 것이므로, index를 셋팅해서 불러와 주세요.
+- **참고**
+    
+    ```python
+    index_col='구별'
+    ```
+    
+
+1. `join` 을 사용하여 Quiz에서 수행한 DataFrame과 인구 데이터 DataFrame을 merge하고, DataFrame을 출력해주세요.
+- **참고**
+    - `join` : Quiz에서 수행한 DataFrame의 index를 기준으로 인구 데이터 DataFrame index 중 매칭되는 값을 매김.
+
+1. 새롭게 merge 된 DataFrame에서 `검거율` 기준으로 오름차순 정렬 후, DataFrame을 출력해주세요.
+- **참고**
+    
+    ```python
+     ascending=True # 오름차순
+    ```
+    
+</aside>

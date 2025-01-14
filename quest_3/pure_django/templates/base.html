@@ -8,24 +8,16 @@
 </head>
 <body>
 
-    <!-- 네비게이션 바 시작 -->
-    <div class="navbar">
-        {% if user.is_authenticated %} <!-- 사용자가 로그인한 경우 -->
-            <h3><a href="{% url 'User:profile' %}">안녕하세요, {{ user.username }}님</a></h3> <!-- 현재 로그인한 사용자의 이름 -->
-            <form action="{% url 'User:logout' %}" method="POST"> <!-- 로그아웃을 위한 폼 -->
-            {% csrf_token %}
-            <button type="submit">로그아웃</button>
-            </form>
-        {% else %} <!-- 사용자가 로그인하지 않은 경우 -->
-        <button><a href="{% url 'User:login'%}">로그인</a></button> <!-- 로그인 페이지로 이동하는 링크 -->
-        <button><a href="{% url 'User:signup'%}">회원가입</a></button> <!-- 회원가입 페이지로 이동하는 링크 -->
-        {% endif %}
-    <!-- 네비게이션 바 끝 -->
+    <!-- 네비게이션 바 포함 -->
+    {% include 'navbar.html' %}
 
     <div class="container">
         {% block content %}
         {% endblock content %}
     </div>
+
+    <!-- 푸터 포함 -->
+    {% include 'footer.html' %}
 
 </body>
 </html>

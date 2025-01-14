@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>사용자 프로필</h1>
+<form method="POST">
+    {% csrf_token %}
+    <label for="username">사용자 이름:</label><br>
+    {{ form.username }}<br>
+    <label for="email">이메일:</label><br>
+    {{ form.email }}<br>
+    <label for="first_name">이름:</label><br>
+    {{ form.first_name }}<br>
+    <label for="last_name">성:</label><br>
+    {{ form.last_name }}<br>
+    <label for="bio">자기소개:</label><br>
+    {{ form.bio }}<br>
+    <label for="profile_image">프로필 이미지:</label><br>
+    {{ form.profile_image }}<br><br>
+    <button type="submit">정보 수정</button>
+<!-- Start of Selection -->
+</form>
+<button type="button" onclick="location.href='{% url 'User:password_change' %}'">비밀번호 변경</button>
+<!-- End of Selection -->
+{% endblock %}
+
+

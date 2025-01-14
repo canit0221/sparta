@@ -3,7 +3,13 @@
     <h1>게시글 상세</h1>
     <h2>{{ post.title }}</h2>
     <p>{{ post.content }}</p>
+    <!-- 수정 버튼: 게시글 수정 페이지로 이동 -->
     <button><a href="{% url 'Post:post_update' post.pk %}">수정</a></button>
-    <button><a href="{% url 'Post:post_delete' post.pk %}">삭제</a></button><br><br>
+    <!-- 삭제 폼: 게시글 삭제를 위한 폼 -->
+    <form action="{% url 'Post:post_delete' post.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">삭제</button>
+    </form>
+    <!-- 취소 버튼: 게시글 목록으로 돌아가기 -->
     <button><a href="{% url 'Post:post_list' %}">취소</a></button>
 {% endblock %}

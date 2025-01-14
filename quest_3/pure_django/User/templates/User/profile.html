@@ -15,10 +15,12 @@
     {{ form.bio }}<br>
     <label for="profile_image">프로필 이미지:</label><br>
     {{ form.profile_image }}<br><br>
-    <button type="submit">정보 수정</button>
+    <button type="button" onclick="location.href='{% url 'User:password_change' %}'">비밀번호 변경</button><br>
+    <button type="submit">정보 수정</button><br>
+    <button><a href="{% url 'Post:post_list' %}">목록</a></button>
 <!-- Start of Selection -->
 </form>
-<button type="button" onclick="location.href='{% url 'User:password_change' %}'">비밀번호 변경</button>
+
 <!-- End of Selection -->
 {% endblock %}
 

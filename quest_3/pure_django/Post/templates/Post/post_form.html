@@ -9,5 +9,5 @@
     <button type="submit">저장</button>
 </form>
 
-<a href="{% if post %}{% url 'Post:post_detail' post.pk %}{% else %}{% url 'Post:post_list' %}{% endif %}">이전으로</a>
+<a href="{% if post %}{% url 'Post:post_detail' post.pk %}{% else %}{% url 'Post:post_list' %}{% endif %}">목록</a>
 {% endblock %} 

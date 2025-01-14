@@ -1,6 +1,9 @@
+import re
 from django.shortcuts import render, redirect
 from .models import Post
 from .forms import PostForm
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 """
 이 모듈은 Post 모델과 관련된 뷰 함수들을 정의합니다.
@@ -26,6 +29,7 @@ def post_detail(request, pk):
     return render(request, "Post/post_detail.html", context)  # 템플릿을 렌더링합니다.
 
 
+@login_required  # 로그인이 필요합니다.
 def post_create(request):
     if request.method == "POST":  # POST 요청인지 확인합니다.
         form = PostForm(request.POST)  # 제출된 데이터를 사용하여 폼을 생성합니다.
@@ -44,6 +48,7 @@ def post_create(request):
     )  # 템플릿을 렌더링합니다.
 
 
+@login_required  # 로그인이 필요합니다.
 def post_update(request, pk):
     post = Post.objects.get(pk=pk)  # 주어진 pk로 Post 객체를 가져옵니다.
     if request.method == "POST":  # POST 요청인지 확인합니다.
@@ -64,7 +69,9 @@ def post_update(request, pk):
     return render(request, "Post/post_form.html", context)  # 템플릿을 렌더링합니다.
 
 
+@require_POST  # POST 요청만 허용합니다.
 def post_delete(request, pk):
-    post = Post.objects.get(pk=pk)  # 주어진 pk로 Post 객체를 가져옵니다.
-    post.delete()  # Post 객체를 삭제합니다.
+    if request.user.is_authenticated:  # 사용자가 인증되어 있으면
+        post = Post.objects.get(pk=pk)  # 주어진 pk로 Post 객체를 가져옵니다.
+        post.delete()  # Post 객체를 삭제합니다.
     return redirect("Post:post_list")  # 포스트 리스트로 리디렉션합니다.

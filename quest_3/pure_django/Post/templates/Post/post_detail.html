@@ -3,5 +3,7 @@
     <h1>게시글 상세</h1>
     <h2>{{ post.title }}</h2>
     <p>{{ post.content }}</p>
-    <a href="{% url 'Post:post_list' %}">목록</a>
+    <button><a href="{% url 'Post:post_update' post.pk %}">수정</a></button>
+    <button><a href="{% url 'Post:post_delete' post.pk %}">삭제</a></button><br><br>
+    <button><a href="{% url 'Post:post_list' %}">취소</a></button>
 {% endblock %}

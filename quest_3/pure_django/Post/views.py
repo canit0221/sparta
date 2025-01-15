@@ -18,7 +18,7 @@ from django.views.decorators.http import require_POST
 
 # Create your views here.
 def post_list(request):
-    posts = Post.objects.all()  # 모든 Post 객체를 가져옵니다.
+    posts = Post.objects.all().order_by("-pk")  # 모든 Post 객체를 가져옵니다.
     context = {"posts": posts}  # 컨텍스트에 posts를 추가합니다.
     return render(request, "Post/post_list.html", context)  # 템플릿을 렌더링합니다.
 

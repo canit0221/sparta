@@ -2,7 +2,7 @@
 {% block content %}
     <h1>게시글 목록</h1>
     {% if user.is_authenticated %}
-        <button><a href="{% url 'Post:post_create' %}">작성</a></button>
+        <a href="{% url 'Post:post_create' %}" class="btn btn-primary">작성</a>
     {% else %}
         <a href="{% url 'User:login' %}">로그인이 필요합니다.</a>
     {% endif %}

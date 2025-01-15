@@ -17,8 +17,8 @@
     {{ form.profile_image }}<br><br>
     <button type="button" onclick="location.href='{% url 'User:password_change' %}'">비밀번호 변경</button><br>
     <button type="submit">정보 수정</button><br>
-    <button><a href="{% url 'Post:post_list' %}">목록</a></button>
-<!-- Start of Selection -->
+    <button type="button" onclick="location.href='{% url 'Post:post_list' %}'">목록</button>
+    <!-- Start of Selection -->
 </form>
 
 <!-- End of Selection -->

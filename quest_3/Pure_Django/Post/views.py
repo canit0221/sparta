@@ -1,7 +1,7 @@
 import re
 from django.shortcuts import render, redirect
-from .models import Post
-from .forms import PostForm
+from .models import Post, Comment, Like
+from .forms import PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
@@ -25,7 +25,8 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = Post.objects.get(pk=pk)  # 주어진 pk로 Post 객체를 가져옵니다.
-    context = {"post": post}  # 컨텍스트에 post를 추가합니다.
+    form = CommentForm()  # 댓글 작성 폼을 생성합니다.
+    context = {"post": post, "form": form}  # 컨텍스트에 post와 form을 추가합니다.
     return render(request, "Post/post_detail.html", context)  # 템플릿을 렌더링합니다.
 
 
@@ -75,3 +76,27 @@ def post_delete(request, pk):
         post = Post.objects.get(pk=pk)  # 주어진 pk로 Post 객체를 가져옵니다.
         post.delete()  # Post 객체를 삭제합니다.
     return redirect("Post:post_list")  # 포스트 리스트로 리디렉션합니다.
+
+
+@login_required
+@require_POST
+def toggle_like(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    like, created = Like.objects.get_or_create(post=post, user=request.user)
+    if not created:
+        like.delete()
+    return redirect("Post:post_detail", pk=post.pk)
+
+
+@login_required
+@require_POST
+def add_comment(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.post = post
+        comment.author = request.user
+        comment.save()
+        return redirect("Post:post_detail", pk=post.pk)
+    return redirect("Post:post_detail", pk=post.pk)

@@ -47,7 +47,7 @@ def signup(request):
 @login_required  # 로그인이 필요합니다.
 def profile(request):
     if request.method == "POST":
-        form = CustomUserChangeForm(request.POST, instance=request.user)
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect("User:profile")  # 프로필 페이지로 리디렉션합니다.
@@ -70,4 +70,20 @@ def password_change(request):
     else:
         form = PasswordChangeForm(request.user)
     context = {"form": form}
+
+
+@login_required  # 로그인이 필요합니다.
+def edit_profile(request):
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("User:profile")  # 프로필 페이지로 리디렉션합니다.
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+    context = {"form": form}
+    return render(
+        request, "User/edit_profile.html", context
+    )  # 정보 수정 템플릿을 렌더링합니다.
+
     return render(request, "User/password_change.html", context)

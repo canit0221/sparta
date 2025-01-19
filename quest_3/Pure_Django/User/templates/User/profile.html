@@ -1,27 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>사용자 프로필</h1>
-<form method="POST">
-    {% csrf_token %}
-    <label for="username">사용자 이름:</label><br>
-    {{ form.username }}<br>
-    <label for="email">이메일:</label><br>
-    {{ form.email }}<br>
-    <label for="first_name">이름:</label><br>
-    {{ form.first_name }}<br>
-    <label for="last_name">성:</label><br>
-    {{ form.last_name }}<br>
-    <label for="bio">자기소개:</label><br>
-    {{ form.bio }}<br>
-    <label for="profile_image">프로필 이미지:</label><br>
-    {{ form.profile_image }}<br><br>
-    <button type="button" onclick="location.href='{% url 'User:password_change' %}'">비밀번호 변경</button><br>
-    <button type="submit">정보 수정</button><br>
-    <button type="button" onclick="location.href='{% url 'Post:post_list' %}'">목록</button>
-    <!-- Start of Selection -->
-</form>
-
-<!-- End of Selection -->
+<div class="container" style="max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h1 style="font-size: 1.8em; color: #333; margin-bottom: 20px;">사용자 프로필</h1>
+    <p style="font-size: 1.2em; color: #555;"><strong>사용자 이름:</strong> {{ user.username }}</p>
+    <p style="font-size: 1.2em; color: #555;"><strong>이메일:</strong> {{ user.email }}</p>
+    <p style="font-size: 1.2em; color: #555;"><strong>이름:</strong> {{ user.first_name }}</p>
+    <p style="font-size: 1.2em; color: #555;"><strong>성:</strong> {{ user.last_name }}</p>
+    <p style="font-size: 1.2em; color: #555;"><strong>자기소개:</strong> {{ user.bio }}</p>
+    <p style="font-size: 1.2em; color: #555;"><strong>프로필 이미지:</strong></p>
+    {% if user.profile_image %}
+        <img src="{{ user.profile_image.url }}" alt="프로필 이미지" style="max-width: 200px; max-height: 200px; border-radius: 8px; margin-bottom: 20px;"><br>
+    {% endif %}
+    <button type="button" class="btn btn-secondary" onclick="location.href='{% url 'User:password_change' %}'" style="margin-right: 10px;">비밀번호 변경</button>
+    <button type="button" class="btn btn-secondary" onclick="location.href='{% url 'User:edit_profile' %}'" style="margin-right: 10px;">정보 수정</button>
+    <button type="button" class="btn btn-secondary" onclick="location.href='{% url 'Post:post_list' %}'">목록</button>
+</div>
 {% endblock %}
-
-

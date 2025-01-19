@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>로그인</h1>
+    <div class="container" style="max-width: 400px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h1 style="font-size: 1.8em; color: #333; margin-bottom: 20px;">로그인</h1>
 
-    <form action="{% url 'User:login' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">로그인</button>
-    </form>
-
+        <form action="{% url 'User:login' %}" method="POST">
+            {% csrf_token %}
+            <div style="margin-bottom: 15px;">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">로그인</button>
+        </form>
+    </div>
 {% endblock content %}

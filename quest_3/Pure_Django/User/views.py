@@ -3,8 +3,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout as auth_logout
 from django.views.decorators.http import require_POST
-from django.contrib.auth.forms import UserCreationForm
-from .forms import CustomUserChangeForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -34,12 +33,12 @@ def logout(request):
 
 def signup(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("User:login")
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     context = {"form": form}
     return render(request, "User/signup.html", context)
 

@@ -125,3 +125,24 @@ class CommentDetailAPIView(APIView):
         ):  # 데이터가 유효한지 확인, 유효하지 않으면 오류 발생 (400 Bad Request)
             serializer.save()  # 데이터 저장
             return Response(serializer.data)  # 직렬화한 데이터를 반환
+
+
+class LikeAPIView(APIView):
+    def post(self, request, post_pk):  # 좋아요 토글
+        post = get_object_or_404(
+            Post, pk=post_pk
+        )  # pk에 해당하는 Post 객체를 가져온다.
+        existing_like = Like.objects.filter(
+            post=post, user=request.user
+        )  # 해당 게시글에 좋아요를 누른 기록이 있는지 확인,
+
+        if existing_like:  # 있으면 삭제
+            existing_like.delete()
+            return Response(
+                {"message": "좋아요가 취소되었습니다."},
+                status=status.HTTP_204_NO_CONTENT,
+            )
+        else:  # 없으면 생성
+            new_like = Like.objects.create(post=post, user=request.user)
+            serializer = LikeSerializer(new_like)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
